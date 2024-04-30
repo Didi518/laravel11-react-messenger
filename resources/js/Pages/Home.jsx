@@ -45,14 +45,14 @@ function Home({ messages = null, selectedConversation = null }) {
                             <div className="flex-1 flex flex-col">
                                 {localMessages.map((message) => (
                                     <MessageItem
-                                        key={messages.id}
+                                        key={message.id}
                                         message={message}
                                     />
                                 ))}
                             </div>
                         )}
                     </div>
-                    {/* <MessageInput conversation={selectedConversation} /> */}
+                    <MessageInput conversation={selectedConversation} />
                 </>
             )}
         </>
