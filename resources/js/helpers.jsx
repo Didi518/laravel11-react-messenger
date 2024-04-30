@@ -33,6 +33,7 @@ export const formatConversationLastMessageDate = (date) => {
         return inputDate.toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
+            second: "2-digit",
         });
     } else if (isYesterday(inputDate)) {
         return (
@@ -40,6 +41,7 @@ export const formatConversationLastMessageDate = (date) => {
             inputDate.toLocaleTimeString([], {
                 hour: "2-digit",
                 minute: "2-digit",
+                second: "2-digit",
             })
         );
     } else if (inputDate.getFullYear() === now.getFullYear()) {
@@ -47,6 +49,9 @@ export const formatConversationLastMessageDate = (date) => {
             day: "2-digit",
             month: "2-digit",
             year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
         });
     } else {
         return inputDate.toLocaleDateString();
