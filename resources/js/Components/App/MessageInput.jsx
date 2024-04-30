@@ -15,6 +15,9 @@ const MessageInput = ({ conversation = null }) => {
     const [messageSending, setMessageSending] = useState(false);
 
     const onSendClick = () => {
+        if (messageSending) {
+            return;
+        }
         if (newMessage.trim() === "") {
             setInputErrorMessage(
                 "Merci d'écrire votre message ou d'uploader un fichier"
@@ -82,17 +85,15 @@ const MessageInput = ({ conversation = null }) => {
                     />
                     <button
                         onClick={onSendClick}
+                        disabled={messageSending}
                         className="btn btn-info rounded-l-none"
                     >
-                        {messageSending && (
-                            <span className="loading loading-spinner loading-xs"></span>
-                        )}
                         <PaperAirplaneIcon className="w-6" />
                         <span className="hidden sm:inline">Envoi</span>
                     </button>
                 </div>
                 {inputErrorMessage && (
-                    <P className="text-xs text-red-400">{inputErrorMessage}</P>
+                    <p className="text-xs text-red-400">{inputErrorMessage}</p>
                 )}
             </div>
             <div className="order-3 xs:order-3 p-2 flex">
