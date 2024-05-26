@@ -33,20 +33,20 @@ class UserController extends Controller
 
         $message = "Le rôle de l'utilisateur a changé en " . ($user->is_admin ? '"Admin"' : '"Utilisateur Régulier"');
 
-        return response()->json(['message', $message]);
+        return response()->json(['message' => $message]);
     }
 
     public function blockUnblock(User $user)
     {
         if ($user->blocked_at) {
             $user->blocked_at = null;
-            $message = 'Votre compte a été activé';
+            $message = 'Utilisateur "' .$user->name.'" a été activé';
         } else {
             $user->blocked_at = now();
-            $message = 'Votre compte a été bloqué';
+            $message = 'Utilisateur "' .$user->name.'" a été bloqué';
         }
         $user->save();
 
-        return response()->json(['message', $message]);
+        return response()->json(['message' => $message]);
     }
 }

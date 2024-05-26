@@ -8,10 +8,12 @@ import {
 } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { Fragment } from "react";
+import { useEventBus } from "@/EventBus";
 
 export default function UserOptionsDropdown({ conversation }) {
+    const { emit } = useEventBus();
+
     const changeUserRole = () => {
-        console.log("Changement de rôle");
         if (!conversation.is_user) {
             return;
         }
@@ -19,7 +21,7 @@ export default function UserOptionsDropdown({ conversation }) {
         axios
             .post(route("user.changeRole", conversation.id))
             .then((res) => {
-                console.log(res.data);
+                emit("toast.show", res.data.message);
             })
             .catch((err) => {
                 console.error(err);
@@ -27,7 +29,6 @@ export default function UserOptionsDropdown({ conversation }) {
     };
 
     const onBlockUser = () => {
-        console.log("Bloquer");
         if (!conversation.is_user) {
             return;
         }
@@ -35,7 +36,7 @@ export default function UserOptionsDropdown({ conversation }) {
         axios
             .post(route("user.blockUnblock", conversation.id))
             .then((res) => {
-                console.log(res.data);
+                emit("toast.show", res.data.message);
             })
             .catch((err) => {
                 console.error(err);
